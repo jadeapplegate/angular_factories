@@ -1,0 +1,37 @@
+<h1> this is my angular app<h1>
+
+
+  <h5>About to save: {{something}}</h5>
+
+<div ng-controller="delmer">
+
+
+  <form ng-submit="addBook()">
+    <input ng-model="newBook.title" placeholder="title">
+    <input ng-model="newBook.description" placeholder="descprition" >
+    <button>Add book</button>
+  </form>
+
+
+
+
+  <ul ng-repeat="book in books">
+
+
+    <div ng-show="!(editBook)">
+      <li>{{book.title}} </li>
+      <li>{{book.description}}</li>
+      <li><button ng-click="delete()">delete</button></li>
+      <li><button ng-click="editBook=!editBook||false">Edit</button></li>
+    </div>
+
+    <div ng-show="editBook">
+      <form ng-submit="updateBook()">
+        <input ng-model="book.title" placeholder="title">
+        <input ng-model="book.description" placeholder="descprition" >
+        <button>Update book</button>
+      </form>
+
+
+    </div>
+  </ul>
