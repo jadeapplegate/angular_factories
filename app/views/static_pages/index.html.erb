@@ -1,9 +1,9 @@
-<h1> this is my angular app<h1>
+<h1>Most Definitely the Best Book App Ever Created!<h1>
+<!-- 
 
+  <h5>About to save: {{something}}</h5> -->
 
-  <h5>About to save: {{something}}</h5>
-
-<div ng-controller="delmer">
+<div ng-controller="BooksCtrl">
 
 
   <form ng-submit="addBook()">
@@ -12,11 +12,7 @@
     <button>Add book</button>
   </form>
 
-
-
-
   <ul ng-repeat="book in books">
-
 
     <div ng-show="!(editBook)">
       <li>{{book.title}} </li>
@@ -31,7 +27,6 @@
         <input ng-model="book.description" placeholder="descprition" >
         <button>Update book</button>
       </form>
-
 
     </div>
   </ul>
