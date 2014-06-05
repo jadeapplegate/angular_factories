@@ -7,10 +7,19 @@ BookApp.factory("BooksFactory", function($http) {
     return $http.get("/books.json"); //.success(function(data) { $scope.books = data})
   }
 
-  return booksFactory
+  booksFactory.create = function(book) {
+    return $http.post("/books.json", book)
+  }
+
+  booksFactory.delete = function(book) {
+    return $http.delete("/books/"+book.id+".json", book)
+  }
+
+  return booksFactory;
+
 });
 
-BookApp.controller("delmer", ["$scope","$http", "BooksFactory",
+BookApp.controller("BooksCtrl", ["$scope","$http", "BooksFactory",
  function($scope, $http, BooksFactory)  {
   $scope.books;
   // $http.get("/books.json").success(function(data) { $scope.books = data} );
@@ -22,12 +31,18 @@ BookApp.controller("delmer", ["$scope","$http", "BooksFactory",
   getBooks();
 
   $scope.delete = function() {
-    var index = this.$index;
-    $http.delete("/books/" + this.book.id + ".json").success(function(data) { $scope.books.splice(index,1)})
+    var index = this.$index
+    BooksFactory.delete(this.book).success(function(data){ 
+     $scope.books.splice(index,1)
+    })
   }
 
   $scope.addBook = function() {
-    $http.post("/books.json", this.newBook).success(function(data) { $scope.books.push(data)})
+    BooksFactory.create(this.newBook).success(function(data){
+      $scope.books.push(data);
+    }); 
+    $scope.newBook = {};
+    //$http.post("/books.json", this.newBook).success(function(data) { $scope.books.push(data)})
   }
 
   $scope.updateBook = function() {

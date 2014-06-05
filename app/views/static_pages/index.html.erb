@@ -15,10 +15,7 @@
   <ul ng-repeat="book in books">
 
     <div ng-show="!(editBook)">
-      <li>{{book.title}} </li>
-      <li>{{book.description}}</li>
-      <li><button ng-click="delete()">delete</button></li>
-      <li><button ng-click="editBook=!editBook||false">Edit</button></li>
+      <li>{{book.title}} by, {{book.description}}<button ng-click="delete()">delete</button><button ng-click="editBook=!editBook||false">Edit</button></li>
     </div>
 
     <div ng-show="editBook">
