@@ -15,6 +15,10 @@ BookApp.factory("BooksFactory", function($http) {
     return $http.delete("/books/"+book.id+".json", book)
   }
 
+  booksFactory.update = function(book) {
+    return $http.put("/books/"+book.id+".json", book)
+  }
+
   return booksFactory;
 
 });
@@ -47,7 +51,7 @@ BookApp.controller("BooksCtrl", ["$scope","$http", "BooksFactory",
 
   $scope.updateBook = function() {
     var _this = this;
-    $http.put("/books/" + this.book.id + ".json",this.book).success(function(data) {
+    BooksFactory.update(this.book).success(function(data){
       _this.editBook = false
     });
   }
